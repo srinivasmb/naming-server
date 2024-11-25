@@ -26,14 +26,15 @@ WORKDIR /usr/local/tomcat/webapps
 COPY --from=build /app/target/naming-server-app.war ./naming-server-app.war
 
 # Expose Tomcat's port
-EXPOSE 8081
+EXPOSE 8080
 
 # Start Tomcat
 CMD ["catalina.sh", "run"]
 
 # Docker build and run commands:
 # docker build -t naming-server-app .
-# docker run -d -p 8081:8081 naming-server-app
+# docker run -d -p 8081:8080 naming-server-app
+
 
 # Application URL:
 # http://localhost:8081/naming-server-app
