@@ -4,8 +4,8 @@ FROM maven:3.9.5-eclipse-temurin-17 AS build
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy the locally downloaded ojdbc7 jar into Maven's local repository in the container
-COPY C:/Users/bsrinivas/.m2/repository/com/oracle/ojdbc7/12.1.0.2.0 /root/.m2/repository/com/oracle/ojdbc7/12.1.0.2.0
+# Copy the locally provided ojdbc7 JAR into the Maven repository
+COPY libs/ojdbc7-12.1.0.2.0.jar /root/.m2/repository/com/oracle/ojdbc7/12.1.0.2.0/ojdbc7-12.1.0.2.0.jar
 
 # Install Git to clone the repository
 RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
