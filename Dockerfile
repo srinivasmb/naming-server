@@ -11,6 +11,8 @@ RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
 RUN git clone https://github.com/srinivasmb/naming-server.git .
 
 # Run Maven build to create the WAR file
+RUN mvn clean package
+
 RUN mvn clean install -DskipTests -X
 
 # Stage 2: Deploy the WAR file to Tomcat (Java 17 compatible)
