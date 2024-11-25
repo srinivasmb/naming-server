@@ -4,6 +4,9 @@ FROM maven:3.9.5-eclipse-temurin-17 AS build
 # Set the working directory in the container
 WORKDIR /app
 
+# Copy the locally downloaded ojdbc7 jar into Maven's local repository in the container
+COPY C:/Users/bsrinivas/.m2/repository/com/oracle/ojdbc7/12.1.0.2.0 /root/.m2/repository/com/oracle/ojdbc7/12.1.0.2.0
+
 # Install Git to clone the repository
 RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
 
@@ -11,8 +14,6 @@ RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
 RUN git clone https://github.com/srinivasmb/naming-server.git .
 
 # Run Maven build to create the WAR file
-RUN mvn clean package
-
 RUN mvn clean install -DskipTests -X
 
 # Stage 2: Deploy the WAR file to Tomcat (Java 17 compatible)
